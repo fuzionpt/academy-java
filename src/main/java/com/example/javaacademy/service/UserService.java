@@ -24,7 +24,7 @@ public class UserService {
 
     public String removeUserById(Long id) {
         repository.deleteById(id);
-        return "User with " + id + "has been removed";
+        return "User with id " + id + " has been removed";
     }
 
     public User updateUser(User user) {
