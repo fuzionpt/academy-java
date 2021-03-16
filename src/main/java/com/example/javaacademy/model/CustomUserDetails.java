@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -47,5 +48,9 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getName () {
+        return user.getName();
     }
 }

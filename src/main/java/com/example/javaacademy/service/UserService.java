@@ -3,7 +3,9 @@ package com.example.javaacademy.service;
 import com.example.javaacademy.entity.User;
 import com.example.javaacademy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -15,10 +17,15 @@ public class UserService {
 
 
     public User addUser(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPwd());
+        user.setPwd(encodedPassword);
         return repository.save(user);
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers(Model model) {
+        List<User> listUsers = repository.findAll();
+        model.addAttribute("listUsers", listUsers);
         return repository.findAll();
     }
 

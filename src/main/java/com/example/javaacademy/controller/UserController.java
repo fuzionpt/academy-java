@@ -19,10 +19,12 @@ public class UserController {
         return service.addUser(user);
 
     }
+    /**
     @GetMapping
     public List<User> getUsers () {
         return service.getUsers();
     }
+     **/
 
     @DeleteMapping("{id}")
     public String removeUserById (@PathVariable Long id) {

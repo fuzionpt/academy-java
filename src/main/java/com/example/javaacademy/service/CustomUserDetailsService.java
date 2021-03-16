@@ -1,10 +1,14 @@
 package com.example.javaacademy.service;
 
+import com.example.javaacademy.entity.User;
+import com.example.javaacademy.model.CustomUserDetails;
 import com.example.javaacademy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.Optional;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -13,6 +17,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return null;
+       User user = repo.findByUserName(userName);
+
+        if (user == null){
+            throw new UsernameNotFoundException("User with " + userName + " doesn't exist");
+        }
+        return new CustomUserDetails(user);
     }
 }

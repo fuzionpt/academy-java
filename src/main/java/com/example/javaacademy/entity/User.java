@@ -1,9 +1,7 @@
 package com.example.javaacademy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_table")
@@ -15,6 +13,12 @@ public class User {
     private String userName;
     private String pwd;
     private String name;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
+
 
     public User (){
         //empty constructor
@@ -57,5 +61,21 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }
