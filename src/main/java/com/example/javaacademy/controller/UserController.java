@@ -18,29 +18,29 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @PostMapping
     public User addUser (@RequestBody User user){
-        return service.addUser(user);
+        return userService.addUser(user);
 
     }
 
     @GetMapping
     public List<User> getUsers () {
-        return service.getUsers();
+        return userService.getUsers();
     }
 
-
-    @DeleteMapping("{id}")
-    public String removeUserById (@PathVariable Long id) {
-        return service.deleteUserById(id);
-
-    }
 
     @PutMapping
     public User updateUser (@RequestBody User user ){
-        return service.updateUser(user);
+        return userService.updateUser(user);
+    }
+
+    @DeleteMapping("{id}")
+    public String deleteUserById (@PathVariable Long id) {
+        return userService.deleteUserById(id);
+
     }
 
 }

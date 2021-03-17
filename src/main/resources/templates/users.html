@@ -33,7 +33,8 @@
                     <th>User ID</th>
                     <th>UserName</th>
                     <th>Name</th>
-<!--                    <th>Creation Date</th>-->
+                    <th>Creation Date</th>
+                    <th>Update Date</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -42,6 +43,9 @@
                         <td th:text="${user.id}"> User ID</td>
                         <td th:text="${user.userName}"> userName</td>
                         <td th:text="${user.name}"> Name</td>
+                        <td th:text="${user.createTimeStamp}"> Creation Date</td>
+                        <td th:text="${user.updateTimeStamp}"> Last updated on</td>
+
 <!--                        <td th:text="${user.creationDate}"> Creation Date</td>-->
                         <td> <a th:href="@{/showFormUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
                             <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>

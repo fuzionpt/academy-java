@@ -75,6 +75,7 @@ public class AppController {
 
         //get user from the service
         User user = userService.getUserById(id);
+        userService.updateUser(user);
 
         //set user as a model attribute to pre populate the form
         model.addAttribute("user", user);
