@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/**
+ * Controller versão original para testar no postman
+ */
+
+
 @RestController
 @RequestMapping(("/users"))
 public class UserController {
@@ -19,16 +25,16 @@ public class UserController {
         return service.addUser(user);
 
     }
-    /**
+
     @GetMapping
     public List<User> getUsers () {
         return service.getUsers();
     }
-     **/
+
 
     @DeleteMapping("{id}")
     public String removeUserById (@PathVariable Long id) {
-        return service.removeUserById(id);
+        return service.deleteUserById(id);
 
     }
 

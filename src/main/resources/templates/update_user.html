@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Update </title>
+
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <h1>Update User Form</h1>
+    <hr>
+    <h2> Update User</h2>
+
+    <form action="#" method="POST" style="max-width: 600px; margin: 0 auto; " th:action="@{/process_register}"
+          th:object="${user}">
+
+
+
+        <div>
+            <input type="hidden" th:field="*{id}">
+        </div>
+
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Username</label>
+                <input class="form-control mb-4 col-4"  readonly
+                       th:field="*{userName}" type="text">
+            </div>
+        </div>
+
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Password</label>
+                <input class="form-control mb-4 col-4"  required
+                       th:field="*{pwd}" type="password">
+            </div>
+        </div>
+
+        <div class="m-3">
+            <div class="form-group row">
+               <label class="col-form-label col-4">Name</label>
+                <input class="form-control mb-4 col-4"  required
+                       th:field="*{name}" type="text">
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-info col-2" > Update User</button>
+        </div>
+    </form>
+
+
+</div>
+<!--    <a th:href = "@{/}"> Back to User List</a>-->
+
+</body>
+</html>

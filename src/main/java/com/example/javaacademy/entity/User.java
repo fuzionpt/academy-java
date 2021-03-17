@@ -1,6 +1,10 @@
 package com.example.javaacademy.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -13,11 +17,16 @@ public class User {
     private String userName;
     private String pwd;
     private String name;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
+    //@Column(insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    //@Temporal(TemporalType.DATE)
+    @Column (nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createTimeStamp;
+    //@Column(insertable = false, updatable = true, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    //@Temporal(TemporalType.DATE)
+    @Column (nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime updateTimeStamp;
 
 
     public User (){
@@ -63,19 +72,19 @@ public class User {
         this.name = name;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
+//    public Date getCreateTimeStamp() {
+//        return createTimeStamp;
+//    }
+//
+//    public void setCreateTimeStamp(Date createTimeStamp) {
+//        this.createTimeStamp = createTimeStamp;
+//    }
+//
+//    public Date getUpdateTimeStamp() {
+//        return updateTimeStamp;
+//    }
+//
+//    public void setUpdateTimeStamp(Date updateTimeStamp) {
+//        this.updateTimeStamp = updateTimeStamp;
+//    }
 }

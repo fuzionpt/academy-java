@@ -1,24 +1,21 @@
 package com.example.javaacademy.controller;
 
 import com.example.javaacademy.entity.User;
-import com.example.javaacademy.repository.UserRepository;
 import com.example.javaacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
+/**
+ * Controller versão 2.0 -  para lidar com o bootstrap frontend
+ */
 
 
 @Controller
 public class AppController {
 
-    @Autowired
-    private UserRepository repository;
 
     @Autowired
     private UserService userService;
@@ -31,6 +28,7 @@ public class AppController {
 
     /**
      * Metodo para reencaminhar para a pagina de registrar
+     *
      * @param model
      * @return
      */
@@ -41,10 +39,11 @@ public class AppController {
     }
 
     /**
-     * Metodo para registar novo utilizador
+     * Metodo para registar novo utilizador no localhost
+     *
      * @param user
      * @return
-     */
+     * */
     @PostMapping("/process_register")
     public String addUser(User user) {
         userService.addUser(user);
@@ -52,34 +51,43 @@ public class AppController {
 
     }
 
+    @PutMapping("/user_update")
+    public String updateUser (User user){
+        userService.updateUser(user);
+        return "update_message";
+    }
+
     /**
      * Metodo para listar todos os utilizadores apos estar logado
+     *
      * @param model
      * @return
      */
     @GetMapping("/list_users")
     public String listAllUsers(Model model) {
-        userService.getUsers(model);
+        model.addAttribute("listUsers", userService.getUsers());
         return "users";
 
     }
 
-}
+    @GetMapping("/showFormUpdate/{id}")
+    public String showForForUpdate(@PathVariable(value = "id") Long id, Model model) {
 
-/**
- @GetMapping("/updateAtribute")
- public String updateUserAtribute (@RequestParam User user, HttpServletRequest request){
- request.setAttribute("task", service.updateUser(user));
- }
+        //get user from the service
+        User user = userService.getUserById(id);
 
-}
-
-    /**
-    @GetMapping("/updateAtribute")
-    public String updateUserAtribute (@RequestParam User user, HttpServletRequest request){
-        request.setAttribute("task", service.updateUser(user));
+        //set user as a model attribute to pre populate the form
+        model.addAttribute("user", user);
+        return "update_user";
     }
-    **/
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUserById(@PathVariable (value = "id") Long id) {
+        userService.deleteUserById(id);
+        return "register_success";
+    }
+
+}
 
 
 

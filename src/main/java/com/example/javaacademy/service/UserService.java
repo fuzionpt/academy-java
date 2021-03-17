@@ -5,9 +5,9 @@ import com.example.javaacademy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,13 +23,11 @@ public class UserService {
         return repository.save(user);
     }
 
-    public List<User> getUsers(Model model) {
-        List<User> listUsers = repository.findAll();
-        model.addAttribute("listUsers", listUsers);
+    public List<User> getUsers() {
         return repository.findAll();
     }
 
-    public String removeUserById(Long id) {
+    public String deleteUserById(Long id) {
         repository.deleteById(id);
         return "User with id " + id + " has been removed";
     }
@@ -39,8 +37,29 @@ public class UserService {
         existingUser.setName(user.getName());
         existingUser.setUserName(user.getUserName());
         existingUser.setPwd(user.getPwd());
+        //existingUser.setUpdatedDate(LocalDateTime.now());
 
         return repository.save(existingUser);
+    }
+
+//    public User updateUserByUserName (String userName) {
+//        User newUser = repository.findByUserName(userName);
+//        newUser.setUserName(newUser.getUserName());
+//        newUser.setPwd(newUser.getPwd());
+//        newUser.setName(newUser.getName());
+//
+//        return repository.save(newUser);
+//    }
+
+    public User getUserById (Long id){
+        Optional<User> optional = repository.findById(id);
+        User user = null;
+        if(optional.isPresent()) {
+            user = optional.get();
+        } else {
+            throw new RuntimeException("User with id: " + id + " not found");
+        }
+        return user;
     }
 
 
