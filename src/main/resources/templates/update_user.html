@@ -16,47 +16,29 @@
     <hr>
     <h2> Update User</h2>
 
-    <form action="#" method="POST" th:action="@{/process_register}"
+    <form action="#" method="POST" th:action="@{/process_update}"
           th:object="${user}">
 
+        <input type="hidden" th:field="*{id}">
+
+        <input type="hidden" th:field="*{userName}" class="form-control mb-4 col-4"  >
 
 
-        <div>
-            <input type="hidden" th:field="*{id}">
-        </div>
+        <input type="text" required th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
 
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-form-label col-4">Username</label>
-                <input class="form-control mb-4 col-4"  readonly
-                       th:field="*{userName}" type="text">
-            </div>
-        </div>
 
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-form-label col-4">Password</label>
-                <input class="form-control mb-4 col-4"  required
-                       th:field="*{pwd}" type="password">
-            </div>
-        </div>
+        <input type="password" required  th:field="*{pwd}" placeholder="Password" class="form-control mb-4 col-4" >
 
-        <div class="m-3">
-            <div class="form-group row">
-               <label class="col-form-label col-4">Name</label>
-                <input class="form-control mb-4 col-4"  required
-                       th:field="*{name}" type="text">
-            </div>
-        </div>
 
-        <div>
-            <button type="submit" class="btn btn-primary col-2" > Update User</button>
-        </div>
+
+        <button type="submit" class="btn btn-primary col-2"> Update User</button>
+
     </form>
-
+    <hr>
+    <a th:href = "@{/login}"> Back to User List</a>
 
 </div>
-<!--    <a th:href = "@{/}"> Back to User List</a>-->
+
 
 </body>
 </html>

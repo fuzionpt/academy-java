@@ -51,12 +51,6 @@ public class AppController {
 
     }
 
-    @PutMapping("/user_update")
-    public String updateUser (User user){
-        userService.updateUser(user);
-        return "update_message";
-    }
-
     /**
      * Metodo para listar todos os utilizadores apos estar logado
      *
@@ -70,12 +64,18 @@ public class AppController {
 
     }
 
+    @PostMapping("/process_update")
+    public String updateUser(User user){
+        userService.updateUser(user);
+        return "register_success";
+    }
+
     @GetMapping("/showFormUpdate/{id}")
     public String showForForUpdate(@PathVariable(value = "id") Long id, Model model) {
 
         //get user from the service
         User user = userService.getUserById(id);
-        userService.updateUser(user);
+        //userService.updateUser(user);
 
         //set user as a model attribute to pre populate the form
         model.addAttribute("user", user);

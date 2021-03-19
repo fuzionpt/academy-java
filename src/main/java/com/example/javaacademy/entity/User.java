@@ -1,5 +1,6 @@
 package com.example.javaacademy.entity;
 
+import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,13 +16,19 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+    @NotNull
+    @Column (unique = true, nullable = false, updatable = false)
     private String userName;
+    @NotNull
+    @Column (nullable = false, updatable = true)
     private String pwd;
+    @NotNull
+    @Column (nullable = false, updatable = true)
     private String name;
     @Column (nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createTimeStamp;
-    @Column (nullable = false, updatable = false)
+    @Column (nullable = false, updatable = true)
     @UpdateTimestamp
     private LocalDateTime updateTimeStamp;
 
@@ -83,5 +90,9 @@ public class User {
 
     public void setUpdateTimeStamp(LocalDateTime updateTimeStamp) {
         this.updateTimeStamp = updateTimeStamp;
+    }
+
+    public boolean hasUserName (String userName){
+        return this.userName.equals(userName);
     }
 }
